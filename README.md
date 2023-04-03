@@ -76,6 +76,8 @@ Observação: Lembrando que todos esses dados estão configurados no arquivo .en
 
 ![Banco de dados Keycloak](https://raw.githubusercontent.com/migueljeffersongit/keycloak-postgres-pgadmin-docker/main/img/pgadmin-banco-de-dados-keycloak.png)
 
+Para backup do banco de dados visite o link do [Pgadmin Backup](https://www.pgadmin.org/docs/pgadmin4/development/backup_dialog.html)
+
 ## Autor
 
 - [@Miguel Jefferson](https://github.com/migueljeffersongit)
