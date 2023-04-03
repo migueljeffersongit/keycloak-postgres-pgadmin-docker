@@ -1,0 +1,59 @@
+version: '3'
+
+networks:
+  infra_dev:
+    driver: bridge
+
+volumes:
+  postgres_data:
+      driver: local
+
+services:
+  postgres_dev:
+      image: "postgres:${POSTGRES_VERSION}"
+      volumes:
+        - ./postgres_data:/var/lib/postgresql/data
+      restart: always
+      environment:
+        POSTGRES_DB: "${POSTGRES_DB}"
+        POSTGRES_USER: "${POSTGRES_USER}"
+        POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      ports:
+        - "5432:5432"
+      healthcheck:
+        test: "exit 0"
+      networks:
+        - infra_dev
+
+  pgadmin4_dev:
+    image: dpage/pgadmin4    
+    restart: unless-stopped # A não ser que o container pare, restart nas falhas
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL}"
+      PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD}"
+    ports: 
+      - 15432:80
+    networks: 
+      - infra_dev
+
+  keycloak_dev:
+      image: "quay.io/keycloak/keycloak:${KEYCLOAK_VERSION}"
+      command: 
+       - start-dev       
+      restart: always
+      environment:
+        KC_DB: postgres
+        KC_DB_URL_HOST: postgres_dev
+        KC_DB_URL_DATABASE: "${POSTGRES_DB}"
+        KC_DB_PASSWORD: "${POSTGRES_PASSWORD}"
+        KC_DB_USERNAME: "${POSTGRES_USER}"
+        KC_DB_SCHEMA: public
+        KEYCLOAK_ADMIN: "${KEYCLOAK_ADMIN}"
+        KEYCLOAK_ADMIN_PASSWORD: "${KEYCLOAK_ADMIN_PASSWORD}"        
+      ports:
+        - 8080:8080
+      networks:
+        - infra_dev
+      depends_on:
+        postgres_dev:
+          condition: service_healthy
