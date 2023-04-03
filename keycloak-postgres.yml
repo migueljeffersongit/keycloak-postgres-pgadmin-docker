@@ -7,6 +7,8 @@ networks:
 volumes:
   postgres_data:
       driver: local
+  keycloak_data:
+      driver: local
 
 services:
   postgres_dev:
@@ -27,7 +29,7 @@ services:
 
   pgadmin4_dev:
     image: dpage/pgadmin4    
-    restart: unless-stopped # A não ser que o container pare, restart nas falhas
+    restart: unless-stopped # restart container caso haja falha, exceto quando o container seja parado.
     environment:
       PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL}"
       PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD}"
@@ -38,8 +40,12 @@ services:
 
   keycloak_dev:
       image: "quay.io/keycloak/keycloak:${KEYCLOAK_VERSION}"
+      volumes:
+      - ./keycloak_data/conf:/opt/keycloak/conf
+      - ./keycloak_data/realms:/opt/keycloak/data/import
+      - ./keycloak_data/themes:/opt/keycloak/themes
       command: 
-       - start-dev       
+       - start-dev                  
       restart: always
       environment:
         KC_DB: postgres

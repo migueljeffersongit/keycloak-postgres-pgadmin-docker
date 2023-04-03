@@ -1,2 +1,2 @@
-keycloak_data/*
+keycloak_data/*/**
 postgres_data/*
