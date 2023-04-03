@@ -57,7 +57,8 @@ A estrutura de pastas deverá ficar da seguinte forma
 ![Visão inicial keycloak](https://raw.githubusercontent.com/migueljeffersongit/keycloak-postgres-pgadmin-docker/main/img/keycloak-console.png)
 
 
-- Acesse o PgAdmin em http://localhost:15432 e informe as credenciais de acesso. 
+- Acesse o PgAdmin em http://localhost:15432 e informe as credenciais de acesso.
+
 - Clique em criar novo server no PgAdmin
 ![Criar novo server PgAdmin](https://raw.githubusercontent.com/migueljeffersongit/keycloak-postgres-pgadmin-docker/main/img/pgadmin-add-server.png)
 
@@ -65,7 +66,7 @@ A estrutura de pastas deverá ficar da seguinte forma
 
 ![Criar novo server PgAdmin](https://raw.githubusercontent.com/migueljeffersongit/keycloak-postgres-pgadmin-docker/main/img/pgadmin-add-server-name.png)
 
-- Agora informe os dados de conexão do banco de dados do Keycloak
+- Agora informe os dados de conexão do banco de dados do Keycloak. No nome do Host informe o nome do container do postgres.
 
 ![Dados conexão banco de dados keycloak](https://raw.githubusercontent.com/migueljeffersongit/keycloak-postgres-pgadmin-docker/main/img/pgadmin-add-server-conexao.png)
 
