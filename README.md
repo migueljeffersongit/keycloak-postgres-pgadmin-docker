@@ -29,6 +29,11 @@ Inicialmente é preciso esclarecer que as configurações aqui descritas e conti
   mkdir keycloak_data/themes
   mkdir postgres_data
 ```
+
+A estrutura de pastas deverá ficar da seguinte forma
+
+![Estrutura de pasta](https://raw.githubusercontent.com/migueljeffersongit/keycloak-postgres-pgadmin-docker/main/img/estrutura-pastas.png)
+
 - Por fim execute os comando abaixo para criar e instanciar os containers
 
 ```bash
